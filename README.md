@@ -4,7 +4,15 @@ Code accompanying the paper [Gated Attention Reader for Text Comprehension](http
 ## Prerequisites
 - Python 2.7
 - Theano (tested on 0.9.0dev1.dev-RELEASE) and all dependencies
+  ```
+  pip install theano=0.9.0
+  ```
 - Lasagne (tested on 0.2.dev1)
+  ```
+  pip install --user --no-deps https://github.com/Lasagne/Lasagne/archive/master.zip
+  ```
+  As of 2018-11-22, this still points to version 0.2.dev1
+
 - Numpy (>=1.12)
 - Maybe more, just use `pip install` if you get an error
 

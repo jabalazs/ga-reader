@@ -13,62 +13,64 @@ VALIDATION_FREQ = 100
 # maximum word length for character model
 MAX_WORD_LEN = 10
 
+
 # dataset params
 def get_params(dataset):
-    if dataset=='cbtcn':
+    if dataset == "cbtcn":
         return cbtcn_params
-    elif dataset=='wdw' or dataset=='wdw_relaxed':
+    elif dataset == "wdw" or dataset == "wdw_relaxed":
         return wdw_params
-    elif dataset=='cnn':
+    elif dataset == "cnn":
         return cnn_params
-    elif dataset=='dailymail':
+    elif dataset == "dailymail":
         return dailymail_params
-    elif dataset=='cbtne':
+    elif dataset == "cbtne":
         return cbtne_params
     else:
-        raise ValueError("Dataset %s not found"%dataset)
+        raise ValueError("Dataset %s not found" % dataset)
+
 
 cbtcn_params = {
-        'nhidden'   :   128,
-        'char_dim'  :   25,
-        'dropout'   :   0.4,
-        'word2vec'  :   'data/word2vec_glove.txt',
-        'train_emb' :   0,
-        'use_feat'  :   1,
-        }
+    "nhidden": 128,
+    "char_dim": 25,
+    "dropout": 0.4,
+    "word2vec": "data/word2vec_glove.txt",
+    "train_emb": 0,
+    "use_feat": 1,
+}
 
 wdw_params = {
-        'nhidden'   :   128,
-        'char_dim'  :   25,
-        'dropout'   :   0.3,
-        'word2vec'  :   'data/word2vec_glove.txt',
-        'train_emb' :   0,
-        'use_feat'  :   1,
-        }
+    "nhidden": 128,
+    "char_dim": 25,
+    "dropout": 0.3,
+    "word2vec": "data/word2vec_glove.txt",
+    "train_emb": 0,
+    "use_feat": 1,
+}
 
 cnn_params = {
-        'nhidden'   :   256,
-        'char_dim'  :   0,
-        'dropout'   :   0.2,
-        'word2vec'  :   'data/word2vec_glove.txt',
-        'train_emb' :   1,
-        'use_feat'  :   0,
-        }
+    "nhidden": 256,
+    "char_dim": 0,
+    "dropout": 0.2,
+    "word2vec": "data/word2vec_glove.txt",
+    "train_emb": 1,
+    "use_feat": 0,
+}
 
 dailymail_params = {
-        'nhidden'   :   256,
-        'char_dim'  :   0,
-        'dropout'   :   0.1,
-        'word2vec'  :   'data/word2vec_glove.txt',
-        'train_emb' :   1,
-        'use_feat'  :   0,
-        }
+    "nhidden": 256,
+    "char_dim": 0,
+    "dropout": 0.1,
+    "word2vec": "data/word2vec_glove.txt",
+    "train_emb": 1,
+    "use_feat": 0,
+}
 
 cbtne_params = {
-        'nhidden'   :   128,
-        'char_dim'  :   25,
-        'dropout'   :   0.4,
-        'word2vec'  :   'data/word2vec_glove.txt',
-        'train_emb' :   0,
-        'use_feat'  :   1,
-        }
+    "nhidden": 128,
+    "char_dim": 25,
+    "dropout": 0.4,
+    "word2vec": "data/word2vec_glove.txt",
+    "train_emb": 0,
+    "use_feat": 1,
+}
