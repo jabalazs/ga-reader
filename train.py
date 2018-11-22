@@ -21,10 +21,6 @@ def main(save_path, params):
     use_feat = params["use_feat"]
     gating_fn = params["gating_fn"]
 
-    import ipdb
-
-    ipdb.set_trace(context=10)
-
     # save settings
     shutil.copyfile("config.py", "%s/config.py" % save_path)
 

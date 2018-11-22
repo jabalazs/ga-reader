@@ -1,6 +1,6 @@
 import sys
 import numpy as np
-import cPickle as pkl
+import pickle as pkl
 import shutil
 
 from config import *

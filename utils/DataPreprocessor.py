@@ -1,12 +1,14 @@
-import numpy as np
 import glob
 import os
-import sys
 
-from config import MAX_WORD_LEN
+from utils.io import load_or_create
+
+from config import MAX_WORD_LEN, CACHE_DIR
 
 SYMB_BEGIN = "@begin"
 SYMB_END = "@end"
+
+FORCE_RELOAD = False
 
 
 class Data:
@@ -26,7 +28,11 @@ class DataPreprocessor:
         """
         preprocess all data into a standalone Data object.
         the training set will be left out (to save debugging time) when no_training_set is True.
+
+        question_dir: str
+            name of the dataset which is also the name of the symbolic link to it
         """
+        dataset = question_dir
         vocab_f = os.path.join(question_dir, "vocab.txt")
         word_dictionary, char_dictionary, num_entities = self.make_dictionary(
             question_dir, vocab_file=vocab_f
@@ -36,15 +42,35 @@ class DataPreprocessor:
             training = None
         else:
             print("preparing training data ...")
-            training = self.parse_all_files(
-                question_dir + "/training", dictionary, use_chars
+            train_pkl_dir = os.path.join(CACHE_DIR, dataset + "_train.pkl")
+            training = load_or_create(
+                train_pkl_dir,
+                self.parse_all_files,
+                question_dir + "/training",
+                dictionary,
+                use_chars,
+                force_reload=FORCE_RELOAD,
             )
         print("preparing validation data ...")
-        validation = self.parse_all_files(
-            question_dir + "/validation", dictionary, use_chars
+        valid_pkl_dir = os.path.join(CACHE_DIR, dataset + "_valid.pkl")
+        validation = load_or_create(
+            valid_pkl_dir,
+            self.parse_all_files,
+            question_dir + "/validation",
+            dictionary,
+            use_chars,
+            force_reload=FORCE_RELOAD,
         )
         print("preparing test data ...")
-        test = self.parse_all_files(question_dir + "/test", dictionary, use_chars)
+        test_pkl_dir = os.path.join(CACHE_DIR, dataset + "_test.pkl")
+        test = load_or_create(
+            test_pkl_dir,
+            self.parse_all_files,
+            question_dir + "/test",
+            dictionary,
+            use_chars,
+            force_reload=FORCE_RELOAD,
+        )
 
         data = Data(dictionary, num_entities, training, validation, test)
         return data
@@ -53,7 +79,9 @@ class DataPreprocessor:
 
         if os.path.exists(vocab_file):
             print("loading vocabularies from " + vocab_file + " ...")
-            vocabularies = map(lambda x: x.strip(), open(vocab_file).readlines())
+            vocabularies = list(
+                map(lambda x: x.strip(), open(vocab_file).readlines())
+            )
         else:
             print(
                 "no "

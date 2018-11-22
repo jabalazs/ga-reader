@@ -1,3 +1,5 @@
+CACHE_DIR = ".cache"
+
 # Minibatch Size
 BATCH_SIZE = 32
 # Gradient clip threshold
