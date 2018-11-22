@@ -49,15 +49,15 @@ class MiniBatchLoader:
 
         # randomly shuffle the question indices in each bin
         if self.shuffle:
-            for ixs in self.bins.itervalues():
+            for ixs in self.bins.values():
                 random.shuffle(ixs)
 
         # construct a list of mini-batches where each batch is a list of question indices
         # questions within the same batch have identical max document length
         self.batch_pool = []
-        for l, ixs in self.bins.iteritems():
+        for l, ixs in self.bins.items():
             n = len(ixs)
-            k = (
+            k = int(
                 n / self.batch_size
                 if n % self.batch_size == 0
                 else n / self.batch_size + 1

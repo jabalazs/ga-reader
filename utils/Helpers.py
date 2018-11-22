@@ -41,13 +41,16 @@ def load_word2vec_embeddings(dictionary, vocab_embed_file):
     vocab_embed = {}
     for line in fp:
         line = line.split()
-        vocab_embed[line[0]] = np.array(map(float, line[1:]), dtype="float32")
+        word = line[0]
+        vector = line[1:]
+        vector = [float(elem) for elem in vector]
+        vocab_embed[word] = np.array(vector, dtype="float32")
     fp.close()
 
     vocab_size = len(dictionary)
     W = np.random.randn(vocab_size, embed_dim).astype("float32")
     n = 0
-    for w, i in dictionary.iteritems():
+    for w, i in dictionary.items():
         if w in vocab_embed:
             W[i, :] = vocab_embed[w]
             n += 1

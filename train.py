@@ -61,7 +61,7 @@ def main(save_path, params):
     max_acc = 0.0
     deltas = []
 
-    logger = open(save_path + "/log", "a", 0)
+    logger = open(save_path + "/log", "a")
 
     if os.path.isfile("%s/best_model.p" % save_path):
         print("loading previously saved model")
